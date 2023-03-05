@@ -13,7 +13,7 @@ public class Item extends PanacheEntityBase {
     @Id
     @SequenceGenerator(name = "ItemSequence", sequenceName = "item_sequence", allocationSize = 1, initialValue = 1)
     @GeneratedValue(generator = "ItemSequence", strategy = GenerationType.SEQUENCE)
-    @Column(name = "itemId")
+    @Column(name = "id")
     public Long id;
     @Column(name = "name")
     public String name;

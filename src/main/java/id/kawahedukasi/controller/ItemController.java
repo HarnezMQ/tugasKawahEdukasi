@@ -21,7 +21,7 @@ public class ItemController {
     @GET
     @Path("/{id}")
     @Transactional
-    public Response getById(@PathParam("itemId") Long id, Map<String, Object> request){
+    public Response getById(@PathParam("id") Long id, Map<String, Object> request){
         Item item = Item.findById(id);
         if (item == null){
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -54,7 +54,7 @@ public class ItemController {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response post(@PathParam("itemId") Long id, Map<String, Object> request){
+    public Response put(@PathParam("itemId") Long id, Map<String, Object> request){
         Item item = Item.findById(id);
         if (item == null){
             return Response.status(Response.Status.BAD_REQUEST).build();
