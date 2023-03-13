@@ -1,5 +1,6 @@
 package id.kawahedukasi.controller;
 
+import com.opencsv.exceptions.CsvValidationException;
 import id.kawahedukasi.dto.FileFormDTO;
 import id.kawahedukasi.model.Item;
 import id.kawahedukasi.services.ExportServices;
@@ -51,6 +52,13 @@ public class ItemController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response importExcel(@MultipartForm FileFormDTO request) throws IOException {
         return importServices.importExcel(request);
+    }
+
+    @POST
+    @Path("/import/csv")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response importCSV(@MultipartForm FileFormDTO request) throws CsvValidationException, IOException {
+        return importServices.importCSV(request);
     }
     @POST
     public Response post(Map<String, Object> request){

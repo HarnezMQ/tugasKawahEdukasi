@@ -41,18 +41,23 @@ public class ImportServices {
     }
     @Transactional
     public Response importCSV(FileFormDTO request) throws IOException, CsvValidationException {
-        File file = File.createTempFile("", "");
+        File file = File.createTempFile("temp", " ");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         fileOutputStream.write(request.file);
 
         CSVReader reader = new CSVReader(new FileReader(file));
         String [] nextLine;
         reader.skip(1);
+
+        List<Item> toPersist = new ArrayList<>();
         while ((nextLine = reader.readNext()) != null){
-            for (String token : nextLine) {
-                String[] strings = line.split(",");
-            }
-            System.out.println("/n");
+            Item item = new Item();
+            item.name = nextLine[0].trim();
+            item.count = nextLine[1].trim();
+            item.price = nextLine[2].trim();
+            item.type = nextLine[3].trim();
+            item.description = nextLine[4].trim();
+            toPersist.add(item);
         }
         Item.persist(toPersist);
         return Response.status(Response.Status.CREATED).entity(new HashMap<>()).build();
